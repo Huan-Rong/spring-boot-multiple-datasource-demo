@@ -1,5 +1,6 @@
 package site.bulibucai.springbootmultipledatasourcedemo;
 
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,6 +48,15 @@ public class SpringBootMultipleDatasourceDemoApplicationTests {
         Assert.assertNotNull(fooDataSourceProperties);
         Assert.assertNotNull(fooDataSource);
         Assert.assertNotNull(fooTxManager);
+    }
+
+    /**
+     * Spring Boot 2.x 默认情况下使用的是 HikariCP
+     */
+    @Test
+    public void testDataSourceType() {
+        Assert.assertEquals(HikariDataSource.class, fooDataSource.getClass());
+        Assert.assertEquals(HikariDataSource.class, barDataSource.getClass());
     }
 
 }
